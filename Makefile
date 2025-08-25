@@ -1,4 +1,10 @@
-.PHONY: help install test test-coverage lint format format-check clean dev sync hello cli
+.PHONY: help install test test-coverage lint format format-check clean dev sync hello cli docker-build docker-build-test docker-run docker-run-mount docker-test docker-sh docker-clean
+
+# Docker settings
+IMAGE ?= ecsify
+TAG ?= latest
+PYTHON_VERSION ?= 3.13
+DOCKER_BUILD_ARGS = --build-arg PYTHON_VERSION=$(PYTHON_VERSION)
 
 help:
 	@echo "ECSify Development Commands (using uv)"
@@ -13,6 +19,16 @@ help:
 	@echo "dev         Setup development environment with uv"
 	@echo "hello       Test ECSify CLI hello world"
 	@echo "cli         Run ECSify CLI interactively"
+	@echo ""
+	@echo "Docker Commands"
+	@echo "---------------"
+	@echo "docker-build        Build runtime image (IMAGE=$(IMAGE) TAG=$(TAG))"
+	@echo "docker-build-test   Build test image (pytest)"
+	@echo "docker-run          Run CLI in container (use ARGS='--help' or 'apply --dry-run')"
+	@echo "docker-run-mount    Run CLI mounting current dir to /app (dev)"
+	@echo "docker-test         Run pytest in container"
+	@echo "docker-sh           Open shell in runtime image"
+	@echo "docker-clean        Remove built images"
 
 sync:
 	uv sync
@@ -66,3 +82,25 @@ hello:
 
 cli:
 	uv run python -m ecsify.cli
+
+docker-build:
+	docker build -f Dockerfile $(DOCKER_BUILD_ARGS) --target runtime -t $(IMAGE):$(TAG) .
+
+docker-build-test:
+	docker build -f Dockerfile $(DOCKER_BUILD_ARGS) --target test -t $(IMAGE)-tests:$(TAG) .
+
+docker-run: docker-build
+	docker run --rm $(IMAGE):$(TAG) $(ARGS)
+
+docker-run-mount: docker-build
+	docker run --rm -it -v $(PWD):/app $(IMAGE):$(TAG) $(ARGS)
+
+docker-test: docker-build-test
+	docker run --rm $(IMAGE)-tests:$(TAG)
+
+console: docker-build
+	docker run --rm --entrypoint /bin/bash -it $(IMAGE)-tests:$(TAG)
+
+docker-clean:
+	- docker rmi -f $(IMAGE):$(TAG) 2>/dev/null || true
+	- docker rmi -f $(IMAGE)-tests:$(TAG) 2>/dev/null || true
