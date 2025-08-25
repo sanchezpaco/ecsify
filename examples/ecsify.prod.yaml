@@ -1,0 +1,14 @@
+# Production overrides for inventory service
+
+services:
+  - name: inventory
+    cluster: prod-cluster
+    replicas: 5
+
+tasks:
+  - family: inventory
+    container:
+      cpu: 512
+      memory: 1024
+      env:
+        LOG_LEVEL: error

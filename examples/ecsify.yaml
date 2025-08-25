@@ -1,0 +1,31 @@
+# Example ECSify configuration
+# This demonstrates a simple inventory management service
+
+tasks:
+  - family: inventory
+    container:
+      name: inventory
+      image: myregistry/inventory:latest
+      port: 8080
+      cpu: 256
+      memory: 512
+      env:
+        LOG_LEVEL: info
+        PORT: "8080"
+        APP_NAME: inventory
+
+  - family: inventory-migrations
+    container:
+      name: inventory-migrations
+      image: myregistry/inventory:latest
+      cpu: 128
+      memory: 256
+      command: ["rake", "db:migrate"]
+      env:
+        DATABASE_URL: "{{env.DATABASE_URL}}"
+
+services:
+  - name: inventory
+    cluster: dev-cluster
+    replicas: 2
+    task_family: inventory
