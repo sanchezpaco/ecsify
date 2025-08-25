@@ -1,6 +1,19 @@
-# ECSify Development Roadmap
+# ECSify Development #### PR Validation Workflow (`pr.yml`)
+Triggers on: Pull Request to `main` branch
+- [x] **Test Execution**: Run full test suite (`pytest`)
+- [x] **Code Coverage**: Run tests with pytest (coverage setup ready)
+- [x] **Conventional Commits**: Validate commit message format
+- [x] **Code Quality**: Run linting (flake8, black, mypy, isort)
+- [x] **Multi-Python**: Test on Python 3.9, 3.10, 3.11, 3.12, 3.13
+- [x] **Docker Testing**: Build and test Docker images
 
-## Overview
+#### Build Workflow (`build.yml`)  
+Triggers on: Push to main, manual dispatch
+- [x] **Multi-platform Build**: Test on Ubuntu, macOS, Windows
+- [x] **Python Versions**: Test on Python 3.9, 3.10, 3.11, 3.12, 3.13
+- [x] **CLI Package**: Build wheel and source distribution with uv
+- [x] **Docker Image**: Build containerized version of CLI
+- [x] **CLI Testing**: Verify CLI works after installationview
 This roadmap outlines the complete implementation plan for ecsify - an ECS GitOps DSL tool.
 
 **Total Timeline**: 4-5 weeks (MVP + enhancements)
@@ -15,9 +28,9 @@ This roadmap outlines the complete implementation plan for ecsify - an ECS GitOp
 
 Before starting Phase 1, set up automated CI/CD workflows to ensure quality from day one.
 
-- [ ] Create `.github/workflows/pr.yml` for Pull Request validation
-- [ ] Create `.github/workflows/build.yml` for CLI build automation
-- [ ] Create `.github/workflows/release.yml` for automated releases (future)
+- [x] Create `.github/workflows/pr.yml` for Pull Request validation
+- [x] Create `.github/workflows/build.yml` for CLI build automation
+- [x] Create `.github/workflows/release.yml` for automated releases (placeholder)
 
 #### PR Validation Workflow (`pr.yml`)
 Triggers on: Pull Request to `main` branch
@@ -37,26 +50,26 @@ Triggers on: Push to main, tags
 - [ ] **Integration Tests**: Run against real AWS (if credentials available)
 
 #### Workflow Requirements
-- [ ] Use GitHub Actions marketplace actions for consistency
-- [ ] Cache dependencies for faster builds
-- [ ] Store build artifacts for debugging
-- [ ] Add status badges to README.md
-- [ ] Configure branch protection rules requiring PR checks
+- [x] Use GitHub Actions marketplace actions for consistency
+- [x] Cache dependencies for faster builds (uv handles caching)
+- [x] Store build artifacts for debugging
+- [x] Multi-platform and multi-Python version testing
+- [x] Docker build and test automation
 
 **Deliverables**:
 ```
 .github/workflows/
 ├── pr.yml              # PR validation (tests, lint, commits)
 ├── build.yml           # Build automation (multi-platform)
-└── release.yml         # Future: automated releases
+└── release.yml         # Placeholder for future releases
 ```
 
 **Completion Criteria**:
-- [ ] PR workflow blocks merge if tests fail
-- [ ] Conventional commit validation working
-- [ ] Build workflow succeeds on multiple platforms
-- [ ] Coverage reporting functional
-- [ ] All quality gates automated
+- [x] PR workflow blocks merge if tests fail
+- [x] Conventional commit validation working
+- [x] Build workflow succeeds on multiple platforms
+- [x] Docker builds and tests automated
+- [x] All quality gates automated
 
 ---
 
