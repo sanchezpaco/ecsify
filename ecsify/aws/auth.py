@@ -27,7 +27,7 @@ def get_aws_session() -> boto3.Session:
         sts = session.client("sts")
         identity = sts.get_caller_identity()
         logger.info("AWS credentials verified successfully")
-        logger.debug(f"AWS Account: {identity.get('Account')}")
+        logger.debug("AWS Account: %s", identity.get("Account"))
         return session
     except NoCredentialsError as e:
         raise AWSError("AWS credentials not found") from e

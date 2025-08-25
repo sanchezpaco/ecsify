@@ -37,14 +37,14 @@ class Deployer:
     def _dry_run_deploy(self, config: ECSifyConfig) -> bool:
         """Show deployment plan without executing"""
         logger.info("Deployment plan:")
-        logger.info(f"  Task definitions: {len(config.tasks)}")
-        logger.info(f"  Services: {len(config.services)}")
+        logger.info("  Task definitions: %s", len(config.tasks))
+        logger.info("  Services: %s", len(config.services))
 
         for task in config.tasks:
-            logger.info(f"  - Task: {task.family}")
+            logger.info("  - Task: %s", task.family)
 
         for service in config.services:
-            logger.info(f"  - Service: {service.name} ({service.replicas} replicas)")
+            logger.info("  - Service: %s (%s replicas)", service.name, service.replicas)
 
         return True
 
@@ -59,11 +59,11 @@ class Deployer:
 
         # Deploy task definitions
         for task in config.tasks:
-            logger.info(f"Deploying task definition: {task.family}")
+            logger.info("Deploying task definition: %s", task.family)
 
         # Deploy services
         for service in config.services:
-            logger.info(f"Deploying service: {service.name}")
+            logger.info("Deploying service: %s", service.name)
 
         logger.info("Deployment completed successfully")
         return True

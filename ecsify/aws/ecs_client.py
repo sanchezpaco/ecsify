@@ -4,8 +4,6 @@ ECS client wrapper for AWS operations
 
 from typing import Any, Dict
 
-import boto3
-
 from ecsify.aws.auth import get_aws_session
 from ecsify.utils.exceptions import AWSError
 from ecsify.utils.logger import get_logger
@@ -40,7 +38,7 @@ class ECSClient:
             if not clusters or clusters[0]["status"] != "ACTIVE":
                 raise AWSError(f"Cluster '{cluster_name}' not found or inactive")
 
-            logger.info(f"Cluster '{cluster_name}' validated successfully")
+            logger.info("Cluster '%s' validated successfully", cluster_name)
             return True
         except Exception as e:
             if isinstance(e, AWSError):
@@ -58,7 +56,7 @@ class ECSClient:
             Task definition ARN
         """
         # Placeholder implementation
-        logger.info(f"Would register task definition: {task_def['family']}")
+        logger.info("Would register task definition: %s", task_def["family"])
         return f"arn:aws:ecs:us-east-1:123456789:task-definition/{task_def['family']}:1"
 
     def create_or_update_service(self, service_config: Dict[str, Any]) -> str:
@@ -72,7 +70,7 @@ class ECSClient:
             Service ARN
         """
         # Placeholder implementation
-        logger.info(f"Would create/update service: {service_config['serviceName']}")
+        logger.info("Would create/update service: %s", service_config["serviceName"])
         return (
             f"arn:aws:ecs:us-east-1:123456789:service/{service_config['serviceName']}"
         )

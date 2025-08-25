@@ -34,10 +34,9 @@ def load_yaml_file(file_path: str) -> Dict[str, Any]:
     try:
         with open(path, "r", encoding="utf-8") as file:
             content = yaml.safe_load(file)
-            logger.info(f"Successfully loaded YAML file: {file_path}")
+            logger.info("Successfully loaded YAML file: %s", file_path)
             return content or {}
     except yaml.YAMLError as e:
-        raise ValidationError(f"YAML syntax error in {file_path}: {e}")
+        raise ValidationError(f"YAML syntax error in {file_path}: {e}") from e
     except Exception as e:
-        raise ValidationError(f"Error reading file {file_path}: {e}")
-        raise ValidationError(f"Error reading file {file_path}: {e}")
+        raise ValidationError(f"Error reading file {file_path}: {e}") from e
