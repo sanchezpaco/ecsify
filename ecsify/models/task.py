@@ -4,11 +4,13 @@ Task definition models
 
 from typing import Dict, List, Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class ContainerSpec(BaseModel):
     """Container specification within a task definition"""
+
+    model_config = ConfigDict(extra="forbid")
 
     name: str
     image: str
@@ -18,18 +20,13 @@ class ContainerSpec(BaseModel):
     command: Optional[List[str]] = None
     env: Optional[Dict[str, str]] = None
 
-    class Config:
-        extra = "forbid"
-
 
 class TaskDefinition(BaseModel):
     """ECS Task Definition configuration"""
+
+    model_config = ConfigDict(extra="forbid")
 
     family: str = Field(..., min_length=1)
     container: ContainerSpec
     execution_role_arn: Optional[str] = None
     task_role_arn: Optional[str] = None
-
-    class Config:
-        extra = "forbid"
-        extra = "forbid"

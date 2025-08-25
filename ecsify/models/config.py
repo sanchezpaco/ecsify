@@ -18,4 +18,3 @@ class ECSifyConfig(BaseModel):
 
     class Config:
         extra = "forbid"
-        extra = "forbid"
