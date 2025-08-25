@@ -2,7 +2,8 @@
 Configuration merging utilities
 """
 
-from typing import Dict, Any
+from typing import Any, Dict
+
 from ecsify.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -27,4 +28,5 @@ def deep_merge(base: Dict[str, Any], override: Dict[str, Any]) -> Dict[str, Any]
         else:
             result[key] = value
 
+    return result
     return result

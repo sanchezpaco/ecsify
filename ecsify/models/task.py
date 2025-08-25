@@ -2,7 +2,8 @@
 Task definition models
 """
 
-from typing import Optional, List, Dict
+from typing import Dict, List, Optional
+
 from pydantic import BaseModel, Field
 
 
@@ -30,4 +31,5 @@ class TaskDefinition(BaseModel):
     task_role_arn: Optional[str] = None
 
     class Config:
+        extra = "forbid"
         extra = "forbid"

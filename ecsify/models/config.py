@@ -3,10 +3,11 @@ Configuration models for ECSify
 """
 
 from typing import List
+
 from pydantic import BaseModel
 
-from ecsify.models.task import TaskDefinition
 from ecsify.models.service import ServiceDefinition
+from ecsify.models.task import TaskDefinition
 
 
 class ECSifyConfig(BaseModel):
@@ -16,4 +17,5 @@ class ECSifyConfig(BaseModel):
     services: List[ServiceDefinition]
 
     class Config:
+        extra = "forbid"
         extra = "forbid"

@@ -2,7 +2,7 @@
 Configuration validation using Pydantic models
 """
 
-from typing import Dict, Any
+from typing import Any, Dict
 
 from ecsify.models.config import ECSifyConfig
 from ecsify.utils.exceptions import ValidationError

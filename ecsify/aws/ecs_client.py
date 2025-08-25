@@ -2,7 +2,8 @@
 ECS client wrapper for AWS operations
 """
 
-from typing import Dict, Any
+from typing import Any, Dict
+
 import boto3
 
 from ecsify.aws.auth import get_aws_session

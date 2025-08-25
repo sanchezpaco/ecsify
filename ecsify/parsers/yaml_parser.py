@@ -3,7 +3,8 @@ YAML file parsing utilities
 """
 
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any, Dict
+
 import yaml
 
 from ecsify.utils.exceptions import ValidationError
@@ -38,4 +39,5 @@ def load_yaml_file(file_path: str) -> Dict[str, Any]:
     except yaml.YAMLError as e:
         raise ValidationError(f"YAML syntax error in {file_path}: {e}")
     except Exception as e:
+        raise ValidationError(f"Error reading file {file_path}: {e}")
         raise ValidationError(f"Error reading file {file_path}: {e}")

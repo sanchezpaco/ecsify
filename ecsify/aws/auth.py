@@ -3,7 +3,7 @@ AWS authentication and credentials handling
 """
 
 import boto3
-from botocore.exceptions import NoCredentialsError, ClientError
+from botocore.exceptions import ClientError, NoCredentialsError
 
 from ecsify.utils.exceptions import AWSError
 from ecsify.utils.logger import get_logger

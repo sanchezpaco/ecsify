@@ -2,8 +2,8 @@
 Main deployment orchestration logic
 """
 
-from ecsify.models.config import ECSifyConfig
 from ecsify.aws.ecs_client import ECSClient
+from ecsify.models.config import ECSifyConfig
 from ecsify.utils.logger import get_logger
 
 logger = get_logger(__name__)
