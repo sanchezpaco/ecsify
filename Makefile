@@ -38,7 +38,7 @@ install: sync
 
 test:
 	@echo "Running tests..."
-	uv run pytest tests/ -v
+	uv run pytest -s tests/ -v
 
 test-file:
 	@echo "Usage: make test-file SPEC=tests/test_cli.py"
