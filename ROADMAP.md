@@ -65,15 +65,18 @@ Triggers on: Push to main, tags
 ### 1.1 Project Setup & Structure
 **Priority**: Critical | **Estimated Time**: 2 hours
 
-- [ ] Create Python package structure according to SYSTEM_DESIGN.md section 11
-- [ ] Set up `setup.py` with package metadata and entry points
-- [ ] Create `requirements.txt` with dependencies: click>=8.0.0, pydantic>=2.0.0, boto3>=1.28.0, PyYAML>=6.0, rich>=13.0.0
-- [ ] Initialize all module directories with `__init__.py` files
-- [ ] Create basic project documentation (README.md, LICENSE)
+- [x] Create Python package structure according to SYSTEM_DESIGN.md section 11
+- [x] Set up `pyproject.toml` with package metadata and entry points (modern Python packaging)
+- [x] Configure dependencies with uv package manager: click>=8.0.0, pydantic>=2.0.0, boto3>=1.28.0, PyYAML>=6.0, rich>=13.0.0
+- [x] Initialize all module directories with `__init__.py` files
+- [x] Create basic project documentation (README.md, LICENSE)
+- [x] Add Docker support for CLI execution and testing
+- [x] Configure Makefile with development and Docker commands
 
 **Deliverables**:
 ```
 ecsify/
+├── __main__.py         # Entry point for python -m ecsify
 ├── cli.py
 ├── models/
 ├── parsers/
@@ -82,8 +85,10 @@ ecsify/
 ├── utils/
 ├── tests/
 ├── examples/
-├── setup.py
-└── requirements.txt
+├── pyproject.toml      # Modern Python packaging (replaces setup.py)
+├── uv.lock            # Lockfile for reproducible builds
+├── Dockerfile         # Multi-stage build for CLI and tests
+└── Makefile           # Development and Docker commands
 ```
 
 ### 1.2 Pydantic Data Models
