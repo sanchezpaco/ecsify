@@ -36,13 +36,13 @@ sync:
 install: sync
 	uv pip install -e .
 
-test:
+test-all:
 	@echo "Running tests..."
 	uv run pytest -s tests/ -v
 
-test-file:
-	@echo "Usage: make test-file SPEC=tests/test_cli.py"
-	uv run pytest $(SPEC) -v
+test:
+	@echo "Usage: make test SPEC=tests/test_cli.py"
+	uv run pytest -s $(SPEC) -v
 
 test-coverage:
 	@echo "Running tests with coverage..."
