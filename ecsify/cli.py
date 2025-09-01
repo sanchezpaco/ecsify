@@ -8,6 +8,7 @@ import click
 from rich.console import Console
 from rich.panel import Panel
 
+from ecsify.models.config import ECSifyConfig
 from ecsify.parsers.validator import validate_config
 from ecsify.parsers.yaml_parser import load_yaml_file
 from ecsify.utils.exceptions import ValidationError
@@ -78,11 +79,15 @@ def version() -> None:
 def validate(file: str) -> None:
     """Validates ecsify.yaml files"""
 
+    _validate_file_and_exit_on_error(file)
+    console.print(f"[bold green]✅ Configuration is valid: {file}[/bold green")
+
+
+def _validate_file_and_exit_on_error(file: str) -> ECSifyConfig:
+    """Helper function to validate file and exit on error"""
     try:
         config_data = load_yaml_file(file)
-        validate_config(config_data)
-        console.print(f"[bold green]✅ Configuration is valid: {file}[/bold green]")
-
+        return validate_config(config_data)
     except FileNotFoundError as e:
         console.print(f"[bold red]❌  {e}[/bold red]")
         sys.exit(1)
