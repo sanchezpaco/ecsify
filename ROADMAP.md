@@ -107,11 +107,11 @@ ecsify/
 ### 1.2 Pydantic Data Models
 **Priority**: Critical | **Estimated Time**: 3 hours
 
-- [ ] Implement `models/config.py` with `ECSifyConfig` root model
-- [ ] Implement `models/task.py` with `TaskDefinition` and `ContainerSpec` models
-- [ ] Implement `models/service.py` with `ServiceDefinition` model
-- [ ] Add comprehensive field validation (CPU/memory constraints, name patterns)
-- [ ] Add unit tests for all models with valid/invalid data scenarios
+- [x] Implement `models/config.py` with `ECSifyConfig` root model
+- [x] Implement `models/task.py` with `TaskDefinition` and `ContainerSpec` models
+- [x] Implement `models/service.py` with `ServiceDefinition` model
+- [ ] Add comprehensive field validation (CPU/memory constraints, name patterns) (future)
+- [x] Add unit tests for all models with valid/invalid data scenarios
 
 **Validation Rules**:
 - Task family names: alphanumeric + hyphens only
@@ -123,11 +123,12 @@ ecsify/
 ### 1.3 YAML Parsing & Validation
 **Priority**: Critical | **Estimated Time**: 2 hours
 
-- [ ] Implement `parsers/yaml_parser.py` for loading YAML files
-- [ ] Implement `parsers/validator.py` for Pydantic validation
-- [ ] Add comprehensive error handling for YAML syntax errors
-- [ ] Add validation error reporting with line numbers and field paths
-- [ ] Create unit tests with sample valid/invalid YAML files
+- [ ] Create command validate to validate the ecsify.yaml
+  - [ ] Implement `parsers/yaml_parser.py` for loading YAML files
+  - [ ] Implement `parsers/validator.py` for Pydantic validation
+  - [ ] Add comprehensive error handling for YAML syntax errors
+  - [ ] Add validation error reporting with line numbers and field paths
+  - [ ] Create unit tests with sample valid/invalid YAML files
 
 **Features**:
 - Load `ecsify.yaml` from current directory

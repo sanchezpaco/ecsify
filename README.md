@@ -90,10 +90,13 @@ python -m ecsify --help
 python -m ecsify version
 python -m ecsify apply
 python -m ecsify apply --dry-run --env prod --service inventory
+python -m ecsify validate
+python -m ecsify validate --file ecsify.prod.yaml
 
 # Using uv (if installed with uv)
 uv run ecsify apply
 uv run ecsify apply --dry-run --env prod --service inventory
+uv run ecsify validate --file examples/ecsify.yaml
 
 # JSON output for automation
 python -m ecsify apply --json
@@ -107,6 +110,8 @@ python -m ecsify apply --json
   - `--service`: Deploy only a specific service
   - `--file`: Custom configuration file to use
   - `--json`: Output in JSON format for automation
+- `validate`: Validate ecsify.yaml configuration files
+  - `--file` / `-f`: Custom configuration file to validate (default: ecsify.yaml)
 - `version`: Show ECSify version
 
 ### Development Commands
@@ -170,5 +175,8 @@ The project uses modern Python packaging standards with `pyproject.toml`:
 2. **Phase 2**: Environment support & service selection
 3. **Phase 3**: UX improvements
 4. **Phase 4**: Advanced features
+
+## Sample Flow for apply command
+[![](https://mermaid.ink/img/pako:eNp9U8Fy2jAQ_ZUdnYEBYorjQzuNTUjSadMpyaE1OSj2YjTIkkeSQ1yGf68sATVMpzp4vLtv3z49STuSyRxJRFZcbrM1VQaekqUAuz6nzxoVqFpowEyzVQO0qngD_dUhHjS05C_Q73-Em_Q7VRrPCp7mxtXjXcxrbSwfvjNt9Ke9r8a2Cj9RO1DSTvQAJgrIfMdLB_lNOuAsjRVSg9CSnhD-mzjEbfoDC-YGPlG9gQRXTDDDpAAmYBYvDj0zj-4S3LrUfLdA9cYyvBA878i4O8oQuIUD3KPa1YdXJvLL8d26RgMKK84yqi_zAs1Wqo31oVuRVctBeeS5uaQ5vFJORXZyYd519D59rvJW4cnUf8isJBMGjHTb-I9c6xrk0jIryXnLVTvuM_fv3NiHNLHbkk17eUSLPPP83mN88OCCL-ljbaragK7Lkqom6s493Jxu6ng2gpZnW3Hq879nrfCN6YttLAw1tbZaSI8UiuUkMqrGHilRlbQNya6FL4lZo2Unkf3NqdosyVLsbU9FxS8py2ObknWxJtGKcm0jb0nCaKFoecoqFDmqWNbCkGg0mjgSEu3IO4mC4HownEyvJuFVGIyGwbhHGhJNx4NwGlx_GAeTcDQehdN9j_x2U4e2YAkwZ0aqr_7xuje8_wNBqyYO?type=png)](https://mermaid.live/edit#pako:eNp9U8Fy2jAQ_ZUdnYEBYorjQzuNTUjSadMpyaE1OSj2YjTIkkeSQ1yGf68sATVMpzp4vLtv3z49STuSyRxJRFZcbrM1VQaekqUAuz6nzxoVqFpowEyzVQO0qngD_dUhHjS05C_Q73-Em_Q7VRrPCp7mxtXjXcxrbSwfvjNt9Ke9r8a2Cj9RO1DSTvQAJgrIfMdLB_lNOuAsjRVSg9CSnhD-mzjEbfoDC-YGPlG9gQRXTDDDpAAmYBYvDj0zj-4S3LrUfLdA9cYyvBA878i4O8oQuIUD3KPa1YdXJvLL8d26RgMKK84yqi_zAs1Wqo31oVuRVctBeeS5uaQ5vFJORXZyYd519D59rvJW4cnUf8isJBMGjHTb-I9c6xrk0jIryXnLVTvuM_fv3NiHNLHbkk17eUSLPPP83mN88OCCL-ljbaragK7Lkqom6s493Jxu6ng2gpZnW3Hq879nrfCN6YttLAw1tbZaSI8UiuUkMqrGHilRlbQNya6FL4lZo2Unkf3NqdosyVLsbU9FxS8py2ObknWxJtGKcm0jb0nCaKFoecoqFDmqWNbCkGg0mjgSEu3IO4mC4HownEyvJuFVGIyGwbhHGhJNx4NwGlx_GAeTcDQehdN9j_x2U4e2YAkwZ0aqr_7xuje8_wNBqyYO)
 
 See ROADMAP.md for detailed implementation plan.

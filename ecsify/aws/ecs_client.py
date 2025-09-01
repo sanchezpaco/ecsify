@@ -14,7 +14,7 @@ logger = get_logger(__name__)
 class ECSClient:
     """AWS ECS client wrapper with error handling"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.session = get_aws_session()
         self.ecs = self.session.client("ecs")
 
