@@ -49,7 +49,7 @@ class TestLoadYAMLFile:
             """It should raise ValidationError"""
             non_existent_file = "non_existent.yaml"
 
-            with pytest.raises(ValidationError) as exc_info:
+            with pytest.raises(FileNotFoundError) as exc_info:
                 load_yaml_file(non_existent_file)
 
             assert (

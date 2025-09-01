@@ -29,4 +29,5 @@ def validate_config(config_data: Dict[str, Any]) -> ECSifyConfig:
         logger.info("Configuration validation passed")
         return config
     except Exception as e:
-        raise ValidationError(f"Configuration validation failed: {e}") from e
+        print("ERROR", e)
+        raise ValidationError(str(e)) from e

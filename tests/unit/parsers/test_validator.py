@@ -4,7 +4,7 @@ Unit tests for config validator
 
 import pytest
 
-from ecsify.parsers.validator import ECSifyConfig
+from ecsify.parsers.validator import validate_config
 from ecsify.utils.exceptions import ValidationError
 
 
@@ -42,7 +42,7 @@ class TestECSifyConfigValidation:
                 ],
             }
 
-            config = ECSifyConfig.model_validate(valid_config)
+            config = validate_config(valid_config)
 
             assert len(config.tasks) == 1
             assert config.tasks[0].family == "web-task"
@@ -80,9 +80,10 @@ class TestECSifyConfigValidation:
             }
 
             with pytest.raises(ValidationError) as exc_info:
-                ECSifyConfig.model_validate(valid_config)
+                validate_config(valid_config)
 
-            errors = exc_info.value.errors()
+            pydantic_error = exc_info.value.__cause__
+            errors = pydantic_error.errors()
 
             assert any(
                 error["loc"] == ("tasks", 0, "family") and error["type"] == "missing"

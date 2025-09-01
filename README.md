@@ -90,10 +90,13 @@ python -m ecsify --help
 python -m ecsify version
 python -m ecsify apply
 python -m ecsify apply --dry-run --env prod --service inventory
+python -m ecsify validate
+python -m ecsify validate --file ecsify.prod.yaml
 
 # Using uv (if installed with uv)
 uv run ecsify apply
 uv run ecsify apply --dry-run --env prod --service inventory
+uv run ecsify validate --file examples/ecsify.yaml
 
 # JSON output for automation
 python -m ecsify apply --json
@@ -107,6 +110,8 @@ python -m ecsify apply --json
   - `--service`: Deploy only a specific service
   - `--file`: Custom configuration file to use
   - `--json`: Output in JSON format for automation
+- `validate`: Validate ecsify.yaml configuration files
+  - `--file` / `-f`: Custom configuration file to validate (default: ecsify.yaml)
 - `version`: Show ECSify version
 
 ### Development Commands

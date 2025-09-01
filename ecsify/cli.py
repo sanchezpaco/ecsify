@@ -2,10 +2,15 @@
 CLI entrypoint for ECSify
 """
 
+import sys
+
 import click
 from rich.console import Console
 from rich.panel import Panel
 
+from ecsify.parsers.validator import validate_config
+from ecsify.parsers.yaml_parser import load_yaml_file
+from ecsify.utils.exceptions import ValidationError
 from ecsify.utils.logger import get_logger
 
 console = Console()
@@ -29,7 +34,7 @@ def main(ctx: click.Context) -> None:
 @click.option("--dry-run", is_flag=True, help="Show deployment plan without executing")
 @click.option("--env", help="Environment configuration to use (dev, staging, prod)")
 @click.option("--service", help="Deploy only a specific service")
-@click.option("--file", help="Custom configuration file to use")
+@click.option("--file", default="ecsify.yaml", help="Custom configuration file to use")
 @click.option("--json", is_flag=True, help="Output in JSON format for automation")
 def apply(dry_run: bool, env: str, service: str, file: str, json: bool) -> None:
     """Deploy services to AWS ECS"""
@@ -66,5 +71,27 @@ def version() -> None:
     console.print("[bold blue]ECSify version 0.1.0[/bold blue]")
 
 
+@main.command()
+@click.option(
+    "--file", "-f", default="ecsify.yaml", help="Custom configuration file to use"
+)
+def validate(file: str) -> None:
+    """Validates ecsify.yaml files"""
+
+    try:
+        config_data = load_yaml_file(file)
+        validate_config(config_data)
+        console.print(f"[bold green]✅ Configuration is valid: {file}[/bold green]")
+
+    except FileNotFoundError as e:
+        console.print(f"[bold red]❌  {e}[/bold red]")
+        sys.exit(1)
+    except ValidationError as e:
+        console.print(f"[bold red]❌ Validation failed for {file}[/bold red]")
+        console.print(f"[yellow]⚠️  {e}[/yellow]")
+        sys.exit(1)
+
+
 if __name__ == "__main__":
+    main()  # pylint: disable=no-value-for-parameter
     main()  # pylint: disable=no-value-for-parameter

@@ -29,7 +29,7 @@ def load_yaml_file(file_path: str) -> Dict[str, Any]:
     path = Path(file_path)
 
     if not path.exists():
-        raise ValidationError(f"Configuration file not found: {file_path}")
+        raise FileNotFoundError(f"Configuration file not found: {file_path}")
 
     try:
         with open(path, "r", encoding="utf-8") as file:

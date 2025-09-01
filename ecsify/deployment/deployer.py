@@ -12,7 +12,7 @@ logger = get_logger(__name__)
 class Deployer:
     """Main deployment orchestrator"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.ecs_client = ECSClient()
 
     def deploy(self, config: ECSifyConfig, dry_run: bool = False) -> bool:
