@@ -23,7 +23,6 @@ def get_aws_session() -> boto3.Session:
     """
     try:
         session = boto3.Session()
-        # Test credentials by making a simple call
         sts = session.client("sts")
         identity = sts.get_caller_identity()
         logger.info("AWS credentials verified successfully")

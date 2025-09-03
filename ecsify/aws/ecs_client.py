@@ -36,7 +36,7 @@ class ECSClient:
             clusters = response.get("clusters", [])
 
             if not clusters or clusters[0]["status"] != "ACTIVE":
-                raise AWSError(f"Cluster '{cluster_name}' not found or inactive")
+                return False
 
             logger.info("Cluster '%s' validated successfully", cluster_name)
             return True
