@@ -39,6 +39,7 @@ dev = [
     "flake8>=6.0.0",
     "mypy>=1.0.0",
     "types-PyYAML",
+    "moto[ecs]>=5.1.11",
 ]
 
 [project.scripts]
